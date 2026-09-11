@@ -1,4 +1,4 @@
-﻿node_modules
+node_modules
 .next
 .git
 .env
@@ -8,12 +8,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-data/*.db
-data/*.db-journal
-data/*.db-wal
-data/*.db-shm
-data/snapshots/*
-public/uploads/*
+/data/*.db
+/data/*.db-journal
+/data/*.db-wal
+/data/*.db-shm
+/data/snapshots/*
+/public/uploads/*
 test_*.mjs
 take_*.mjs
 capture_*.mjs

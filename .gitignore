@@ -40,8 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local database & uploads
-data/
+# local database & uploads (root-level only)
+/data/
 *.db
 *.db-journal
-public/uploads/
+*.db-wal
+*.db-shm
+/public/uploads/
