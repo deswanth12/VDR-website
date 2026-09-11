@@ -1,30 +1,23 @@
-# Multi-stage Dockerfile for Next.js Standalone deployment
-# Optimized for VPS / Coolify with SQLite persistence
-
-# Stage 1: Dependencies
-FROM node:20-alpine AS deps
+# Base image with required libc compatibility
+FROM node:20-alpine AS base
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-
 ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV NEXT_TELEMETRY_DISABLED=1
 
+# Stage 1: Dependencies
+FROM base AS deps
 COPY package.json package-lock.json* ./
 RUN npm ci
 
 # Stage 2: Builder
-FROM node:20-alpine AS builder
-WORKDIR /app
-
-ENV PUPPETEER_SKIP_DOWNLOAD=true
-ENV NEXT_TELEMETRY_DISABLED=1
-
+FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
 RUN npm run build
 
 # Stage 3: Production Runner
-FROM node:20-alpine AS runner
+FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
