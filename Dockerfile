@@ -12,6 +12,8 @@ WORKDIR /app
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 ENV NEXT_TELEMETRY_DISABLED=1
 
+RUN mkdir -p /app/data /app/public/uploads
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
