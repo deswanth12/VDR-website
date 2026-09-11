@@ -48,6 +48,10 @@ export const metadata: Metadata = {
     'AC Compressor R32 Ravulapalem',
     'Copper Pipe AC Konaseema',
   ],
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({
